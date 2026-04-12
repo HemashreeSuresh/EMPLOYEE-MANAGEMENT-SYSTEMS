@@ -1,35 +1,61 @@
 ﻿{% extends "base.html" %}
-
-{% block title %}Login - Employee Management System{% endblock %}
+{% block title %}Login | EMS{% endblock %}
 
 {% block content %}
-<div class="row justify-content-center mt-4">
-    <div class="col-md-7 col-lg-5">
-        <div class="card shadow-sm border-0">
-            <div class="card-body p-4">
-                <h3 class="text-center mb-4">Role Based Login</h3>
+<section class="login-shell">
+    <div class="login-stage">
+        <div class="login-card">
+            <h2>SK Consultant</h2>
+            <p class="login-subtitle">Employee Management System</p>
 
-                <form method="POST">
-                    <div class="mb-3">
-                        <label for="username" class="form-label">Username</label>
-                        <input type="text" class="form-control" id="username" name="username" required>
+            <form method="POST" class="login-form">
+                <div class="mb-3">
+                    <label class="form-label login-label">Username</label>
+                    <div class="login-input-wrap">
+                        <input class="form-control login-input" name="username" placeholder="Enter username" required>
+                        <span class="login-icon">@</span>
                     </div>
+                </div>
 
-                    <div class="mb-3">
-                        <label for="password" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="password" name="password" required>
+                <div class="mb-4">
+                    <label class="form-label login-label">Password</label>
+                    <div class="login-input-wrap">
+                        <input id="loginPassword" type="password" class="form-control login-input" name="password" placeholder="Enter password" required>
+                        <button id="togglePassword" type="button" class="login-eye" aria-label="Toggle password visibility">Show</button>
                     </div>
+                </div>
 
-                    <button type="submit" class="btn btn-primary w-100">Login</button>
-                </form>
+                <button class="btn login-submit w-100" type="submit">Sign In</button>
+            </form>
 
-                <div class="mt-3 small text-muted">
-                    <div><strong>Manager:</strong> manager / manager123</div>
-                    <div><strong>HR:</strong> hr / hr123</div>
-                    <div><strong>Employee:</strong> employee / employee123</div>
+            <a href="#" class="login-forgot">Forgot your password?</a>
+
+            <div class="login-demo-box">
+                <div class="login-demo-title">Demo Credentials</div>
+                <div class="login-demo-grid">
+                    <span class="login-demo-chip">admin / admin123</span>
+                    <span class="login-demo-chip">hr / hr123</span>
+                    <span class="login-demo-chip">manager / manager123</span>
+                    <span class="login-demo-chip">employee / employee123</span>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+(function () {
+    const pwd = document.getElementById('loginPassword');
+    const btn = document.getElementById('togglePassword');
+    if (!pwd || !btn) return;
+
+    btn.addEventListener('click', function () {
+        const hidden = pwd.type === 'password';
+        pwd.type = hidden ? 'text' : 'password';
+        btn.textContent = hidden ? 'Hide' : 'Show';
+    });
+})();
+</script>
 {% endblock %}
